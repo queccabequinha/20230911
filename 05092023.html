@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script lang="JavaScript">
+        function processa()
+           {
+               var nome, email, dataIng, periodo, extensão, nivSatis, prontuario, curso, table, matutino, vespertino, noturno;
+               nome = document.frmDados.txtnome.value;
+               email = document.frmDados.txtemail.value;
+               dataIng = document.frmDados.txtdataIng.value;
+               periodo = (document.frmDados.radperiodo.value);
+               if (periodo=="M")
+               {
+                 matutino="x"
+               }
+               else 
+               {
+                matutino=" "
+               }
+
+               if (periodo=="V")
+               {
+                 vespertino="x"
+               }
+               else 
+               {
+                vespertino=" "
+               }
+
+               if (periodo=="N")
+               {
+                 noturno="x"
+               }
+               else 
+               {
+                noturno=" "
+               }
+               curso = document.frmDados.lstcurso.value; 
+               extensão = "";
+               extensão += (document.frmDados.extensão1.checked?document.frmDados.extensão1.value:"");
+               extensão += ((document.frmDados.extensão2.checked&&extensão!="")?", ":"");
+               extensão += (document.frmDados.extensão2.checked?document.frmDados.extensão2.value:"");
+               extensão += ((document.frmDados.extensão3.checked&&extensão!="")?", ":"");
+               extensão += (document.frmDados.extensão3.checked?document.frmDados.extensão3.value:"");
+               
+
+               nivSatis = document.frmDados.nivSatis.value;
+              prontuario = document.frmDados.txtprontuario.value;
+              form= document.querySelector ("form")
+
+              form.innerHTML = ""
+              table= document.querySelector ("table")
+              table.innerHTML = `
+    
+        <tr>
+        <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrvKGiIoFhd9ndV_aTGUuU__tBcAwAmG9llG6HkV5L&s"></td>
+        <td colspan="2"></td>
+        </tr>
+        <tr>
+        <td colspan="2">prontuário: ${prontuario}</td>
+        <td>Satisfação<br>${nivSatis}%</td>
+        </tr>
+        <tr>
+        <td colspan="3">nome: ${nome}</td>
+        </tr>
+        <tr>
+        <td colspan="3">email: ${email}</td>
+        </tr>
+        <tr>
+        <td colspan="2">cursos: ${curso}</td>
+        <td>Ingresso: ${dataIng}</td>
+        </tr>
+        <tr>
+        <td colspan="3">periodo: </td>
+        </tr>
+        <tr>
+        
+        <td>(${matutino}) Manhã</td>
+        <td>(${vespertino}) Tarde</td>
+        <td>(${noturno}) Noite</td>
+        </tr>
+        <tr>
+        <td rowspan="2" colspan="3">
+        Atividades Extras:
+        ${extensão}
+        </td>
+        </tr>
+        `
+   
+           }   
+       </script>
+</head>
+<body>
+    
+        <form name="frmDados">
+            nome: <input type="text" name="txtnome" placeholder="Informe seu nome"><br>
+            prontuario: <input type="text" name="txtprontuario" placeholder="Informe seu prontuario"><br>
+            E-mail Institucional: <input type="email" name="txtemail" placeholder="Informe@seuemailInstitucional.aqui"><br>
+            Data de Ingresso: <input type="date" name="txtdataIng"><br>
+            periodo: 
+                  <input type="radio" name="radperiodo" value="M" checked>matutino
+                  <input type="radio" name="radperiodo" value="V"> vespertino
+                  <input type="radio" name="radperiodo" value="N"> noturno<br>
+            Curso: 
+                  <select name="lstcurso">
+                     <option value="Eventos">Eventos</option>
+                     <option value="Informatica">Informatica</option>
+                     <option value="Outros">outros</option>
+                  </select><br>
+            Extensões:<br>
+                  <input type="checkbox" name="extensão1" value="música">Música<br>
+                  <input type="checkbox" name="extensão2" value="pintura">Pintura<br>
+                  <input type="checkbox" name="extensão3" value="teatro">Teatro<br>
+            nivel de satisfação: <input type="range" name="nivSatis" min="0" max="100"><br>
+            <input type="button" value="OK" onclick="processa()">
+            <input type="reset" value="Limpar"><br>
+        </form>
+
+        <table>
+
+        </table>
+        
+    </body>
+</body>
+</html>
